@@ -38,24 +38,10 @@ type JsonResponse struct {
 }
 
 func main(){
-
-  // Init the mux router
-
-// Route handles & endpoints
-
-  // Get all User
   router.HandleFunc("/User/", GetUser).Methods("GET")
-
-  // Create a User
   router.HandleFunc("/User/", CreateUser).Methods("POST")
-
-  // Delete a specific User by the UserID
   router.HandleFunc("/User/{Userid}", DeleteUser).Methods("DELETE")
-
-  // Delete all User
   router.HandleFunc("/User/", DeleteUser).Methods("DELETE")
-
-  // serve the app
   fmt.Println("Server at 8080")
   log.Fatal(http.ListenAndServe(":8000", router))
 }
@@ -80,21 +66,14 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
   // Get all User from User table that don't have UserID = "1"
   rows, err := db.Query("SELECT * FROM User")
 
-  // check errors
   checkErr(err)
-
-  // var response []JsonResponse
   var User []User
-
-  // Foreach User
   for rows.Next() {
       var id int
       var UserID string
       var UserName string
 
       err = rows.Scan(&id, &UserID, &UserName)
-
-      // check errors
       checkErr(err)
 
       User = append(User, User{UserID: UserID, UserName: UserName})
@@ -110,9 +89,9 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
   UserName := r.FormValue("Username")
 
   var response = JsonResponse{}
-
+  
   if UserID == "" || UserName == "" {
-      response = JsonResponse{Type: "error", Message: "You are missing UserID or UserName parameter."}
+      response = JsonResponse{Type: "error", Message: "You are missing UserID or UserName parameter."} //Inserting new record.
   } else {
       db := setupDB()
 
@@ -148,8 +127,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 
       _, err := db.Exec("DELETE FROM Users where UserID = $1", UserID)
 
-      // check errors
-      checkErr(err)
+      checkErr(err) //checking for error
 
       response = JsonResponse{Type: "success", Message: "The User has been deleted successfully!"}
   }
