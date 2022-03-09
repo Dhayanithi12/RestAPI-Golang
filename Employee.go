@@ -7,10 +7,6 @@ import (
 	
 )
 
-type Employee struct {
-	Db *sql.DB
-}
-
 func main () {
 
 	const (
