@@ -1,10 +1,10 @@
-his project demonstrates a Go application that connects to a PostgreSQL database and uses gocron for scheduling tasks. It checks for new users and inserts records if they don't exist.
+## This project demonstrates a Go application that connects to a PostgreSQL database and uses gocron for scheduling tasks. It checks for new users and inserts records if they don't exist.
 
 Features
 Database Connectivity: Establishes a connection with PostgreSQL and performs basic CRUD operations.
 Scheduling with gocron: Uses gocron to run tasks at specified intervals for checking and inserting user records.
 Prerequisites
-Ensure you have the following installed:
+## Ensure you have the following installed:
 
 Go (1.14+)
 PostgreSQL
